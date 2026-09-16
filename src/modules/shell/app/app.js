@@ -1,5 +1,5 @@
 import { LightningElement } from 'lwc';
-import { subscribe, navigate, linkHref, setCurrentAppForLinks } from '../../../router';
+import { subscribe, navigate, linkHref } from '../../../router';
 import { routes } from '../../../routes.config';
 import {
     apps,
@@ -58,6 +58,7 @@ export default class App extends LightningElement {
     isPanelOpen = false;
 
     get componentCtor() {
+        if (this.isBuilderApp) return Builder;
         if (!this.route) return NotFound;
         const name = this.route.component;
         return ROUTE_COMPONENTS[name] ?? NotFound;
@@ -65,7 +66,7 @@ export default class App extends LightningElement {
 
     get currentNavPage() {
         const name = this.route?.component;
-        return name ? (ROUTE_TO_NAV_PAGE[name] ?? 'home') : 'home';
+        return name ? ROUTE_TO_NAV_PAGE[name] : undefined;
     }
 
     get currentApp() {
@@ -129,15 +130,13 @@ export default class App extends LightningElement {
     connectedCallback() {
         this._restorePreferences();
         this._sldsVersion = activeSLDSVersion();
-        setCurrentAppForLinks(this._currentApp);
         this.unsubscribe = subscribe((route) => {
             this.route = route;
-            const newApp = route?.app;
+            const newApp = route?.app ?? DEFAULT_APP_ID;
             if (newApp && newApp !== this._currentApp) {
                 this._currentApp = newApp;
-                persistAppId(newApp);
-                setCurrentAppForLinks(newApp);
             }
+            if (route?.app) persistAppId(newApp);
             this._syncBuilderRootClass();
         });
     }
@@ -244,7 +243,6 @@ export default class App extends LightningElement {
         if (!target) return;
         this._currentApp = appId;
         persistAppId(appId);
-        setCurrentAppForLinks(appId);
         navigate(target.defaultPath);
     }
 
@@ -253,7 +251,6 @@ export default class App extends LightningElement {
         if (!target) return;
         this._currentApp = target.id;
         persistAppId(target.id);
-        setCurrentAppForLinks(target.id);
         navigate(target.defaultPath);
     }
 
