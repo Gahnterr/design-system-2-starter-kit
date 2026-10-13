@@ -46,14 +46,14 @@ for (const hash of [false, true]) {
   test(`${mode}: URL owns navigation, duplicate visits and replacement`, async () => {
     const { router, entries, path } = await setup(hash);
     router.subscribe(() => {});
-    assert.equal(router.linkHref('/contacts'), hash ? '#/console/contacts' : '/console/contacts');
-    router.navigate('/contacts');
-    assert.equal(path(), '/console/contacts');
-    router.navigate('/contacts');
+    assert.equal(router.linkHref('/'), hash ? '#/console' : '/console');
+    router.navigate('/missing');
+    assert.equal(path(), '/console/missing');
+    router.navigate('/missing');
     assert.equal(entries.length, 2);
-    router.navigate('/icons', { replace: true });
+    router.navigate('/other', { replace: true });
     assert.equal(entries.length, 2);
-    assert.equal(path(), '/console/icons');
+    assert.equal(path(), '/console/other');
   });
   test(`${mode}: only root redirects using saved preference`, async () => {
     const root = await setup(hash, '/', 'console');
@@ -78,17 +78,18 @@ for (const hash of [false, true]) {
     assert.equal(route.app, 'builder');
     assert.equal(route.component, 'page-builder');
     assert.equal(state.context.document.title, 'Builder');
-    state.visit('/builder/contacts');
+    state.visit('/builder/verato-domains');
     assert.equal(route.component, 'page-builder');
-    state.visit('/console/contacts/42');
-    assert.equal(route.params.id, '42');
-    assert.equal(state.context.document.title, 'Contact 42');
+    state.visit('/console/verato-domains/core-person');
+    assert.equal(route.component, 'page-cluster-mapping-config');
+    assert.equal(route.params.id, 'core-person');
+    assert.equal(state.context.document.title, 'Cluster Mapping');
   });
   test(`${mode}: query remains in the address without changing the page match`, async () => {
-    const state = await setup(hash, '/console/contacts?search=A');
-    assert.equal(state.router.getCurrentRoute().component, 'page-contacts');
-    state.router.navigate('/contacts?search=B');
-    assert.equal(state.path(), '/console/contacts?search=B');
+    const state = await setup(hash, '/console?search=A');
+    assert.equal(state.router.getCurrentRoute().component, 'page-verato-domains');
+    state.router.navigate('/?search=B');
+    assert.equal(state.path(), '/console?search=B');
   });
 }
 
@@ -117,7 +118,7 @@ for (const hash of [false, true]) {
 }
 
 test('malformed incoming hashes show Not Found on load and history navigation', async () => {
-  for (const address of ['//console/contacts', 'https://example.test', '/\\example.test']) {
+  for (const address of ['//console/verato-domains', 'https://example.test', '/\\example.test']) {
     const state = await setup(true, address);
     let route;
     state.router.subscribe(value => { route = value; });

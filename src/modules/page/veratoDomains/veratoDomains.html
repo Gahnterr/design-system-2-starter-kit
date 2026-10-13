@@ -1,0 +1,23 @@
+<template>
+    <div class="slds-p-horizontal_medium">
+        <ui-page-header
+            variant="object-home"
+            icon-name="standard:account"
+            object-label="Verato Cluster Mapping"
+            title="All Verato Domains"
+            meta-text={metaText}
+            hide-list-controls
+            onsearch={handleSearch}>
+        </ui-page-header>
+
+        <lightning-datatable
+            key-field="id"
+            data={filteredData}
+            columns={columns}
+            sorted-by={sortedBy}
+            sorted-direction={sortedDirection}
+            onsort={handleSort}
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </div>
+</template>

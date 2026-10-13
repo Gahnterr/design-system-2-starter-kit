@@ -9,19 +9,15 @@ import {
     DEFAULT_APP_ID,
 } from '../../../apps.config';
 import { toggleSLDS, activeSLDSVersion, STORAGE_KEY_SLDS_VERSION } from '../../../build/slds-loader';
-import Home from 'page/home';
-import IconTest from 'page/iconTest';
-import Contacts from 'page/contacts';
-import ContactDetail from 'page/contactDetail';
+import VeratoDomains from 'page/veratoDomains';
+import ClusterMappingConfig from 'page/clusterMappingConfig';
 import Builder from 'page/builder';
 import NotFound from 'page/notFound';
 
 /** Option A: explicit registration – add one import + one entry here when adding a route */
 const ROUTE_COMPONENTS = {
-    'page-home': Home,
-    'page-icon-test': IconTest,
-    'page-contacts': Contacts,
-    'page-contact-detail': ContactDetail,
+    'page-verato-domains': VeratoDomains,
+    'page-cluster-mapping-config': ClusterMappingConfig,
     'page-builder': Builder,
 };
 

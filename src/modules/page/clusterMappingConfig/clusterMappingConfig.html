@@ -1,0 +1,45 @@
+<template>
+    <template lwc:if={domain}>
+        <div class="slds-p-horizontal_medium">
+            <ui-page-header
+                variant="record-home"
+                icon-name="standard:account"
+                title={domain.name}
+                breadcrumbs={breadcrumbs}
+                meta-text={metaText}
+                meta-title={lastSavedExact}
+                onbreadcrumbclick={handleBreadcrumbClick}>
+                <lightning-button-group slot="actions">
+                    <lightning-button label="Refresh"></lightning-button>
+                    <lightning-button label="Validate"></lightning-button>
+                    <lightning-button label="Send"></lightning-button>
+                </lightning-button-group>
+            </ui-page-header>
+
+            <lightning-tabset>
+                <lightning-tab label="Cluster Mapping">
+                    <div class="c-layout">
+                        <ui-cluster-tree
+                            clusters={clusters}
+                            selected-id={selectedId}
+                            onclusterselect={handleClusterSelect}>
+                        </ui-cluster-tree>
+                        <ui-cluster-mapping-card
+                            cluster={selectedCluster}
+                            attributes={selectedAttributes}>
+                        </ui-cluster-mapping-card>
+                    </div>
+                </lightning-tab>
+                <lightning-tab label="View Filter">
+                    <p class="slds-p-around_medium slds-text-color_weak">View Filter content goes here.</p>
+                </lightning-tab>
+                <lightning-tab label="Outbound History">
+                    <p class="slds-p-around_medium slds-text-color_weak">Outbound History content goes here.</p>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </template>
+    <template lwc:elseif={isNotFound}>
+        <p class="slds-p-around_medium">This Verato domain doesn't exist.</p>
+    </template>
+</template>

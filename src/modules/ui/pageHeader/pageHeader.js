@@ -18,7 +18,9 @@ export default class PageHeader extends LightningElement {
     @api title = '';
     @api label = '';
     @api metaText = '';
+    @api metaTitle = '';
     @api hideDetails = false;
+    @api hideListControls = false;
 
     _variant = VARIANT_BASE;
     _fields = [];
@@ -95,8 +97,8 @@ export default class PageHeader extends LightningElement {
         return this.isRecordHome && !this.hideDetails && this._fields.length > 0;
     }
 
-    get showBaseMeta() {
-        return this.isBase && !!this.metaText;
+    get showInlineMeta() {
+        return (this.isBase || this.isRecordHome) && !!this.metaText;
     }
 
     get showBreadcrumbs() {
@@ -105,6 +107,10 @@ export default class PageHeader extends LightningElement {
 
     get showActions() {
         return !this.isBase;
+    }
+
+    get showListControls() {
+        return !this.hideListControls;
     }
 
     get showSwitcher() {
@@ -119,6 +125,17 @@ export default class PageHeader extends LightningElement {
         this.dispatchEvent(
             new CustomEvent('search', {
                 detail: { value: event.target.value },
+                bubbles: false,
+                composed: false,
+            })
+        );
+    }
+
+    handleBreadcrumbClick(event) {
+        event.preventDefault();
+        this.dispatchEvent(
+            new CustomEvent('breadcrumbclick', {
+                detail: { name: event.currentTarget.name },
                 bubbles: false,
                 composed: false,
             })

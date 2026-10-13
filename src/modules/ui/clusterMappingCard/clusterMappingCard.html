@@ -1,0 +1,19 @@
+<template>
+    <template lwc:if={hasCluster}>
+        <lightning-card title={title}>
+            <div class="slds-p-horizontal_medium">
+                <ui-cluster-mapping-form cluster-name={cluster.name} attributes={attributes}></ui-cluster-mapping-form>
+            </div>
+        </lightning-card>
+    </template>
+    <template lwc:else>
+        <lightning-card>
+            <div class="slds-p-around_large slds-text-align_center">
+                <h2 class="slds-text-heading_medium slds-m-bottom_x-small">No cluster selected</h2>
+                <p class="slds-text-color_weak">
+                    Select a cluster from the list on the left bar to define its mapping configuration.
+                </p>
+            </div>
+        </lightning-card>
+    </template>
+</template>

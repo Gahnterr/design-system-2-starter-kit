@@ -1,0 +1,7 @@
+.c-layout {
+    display: grid;
+    /* Fixed-width cluster list beside a flexible mapping card; no hook for this width. */
+    grid-template-columns: 19.5rem 1fr;
+    gap: var(--slds-g-spacing-4, 1rem);
+    align-items: start;
+}

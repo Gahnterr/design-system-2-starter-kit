@@ -10,7 +10,9 @@
                             <lightning-breadcrumb
                                 key={crumb.href}
                                 label={crumb.label}
-                                href={crumb.href}>
+                                name={crumb.name}
+                                href={crumb.href}
+                                onclick={handleBreadcrumbClick}>
                             </lightning-breadcrumb>
                         </template>
                     </lightning-breadcrumbs>
@@ -41,8 +43,8 @@
                                 </div>
                             </template>
                         </div>
-                        <template lwc:if={showBaseMeta}>
-                            <p class="slds-page-header__name-meta">{metaText}</p>
+                        <template lwc:if={showInlineMeta}>
+                            <p class="slds-page-header__name-meta" title={metaTitle}>{metaText}</p>
                         </template>
                     </div>
                 </div>
@@ -80,54 +82,56 @@
                                     onchange={handleSearchChange}>
                                 </lightning-input>
                             </div>
-                            <div class="slds-page-header__control">
-                                <lightning-button-icon
-                                    icon-name="utility:settings"
-                                    variant="border-filled"
-                                    alternative-text="List View Controls"
-                                    title="List View Controls">
-                                </lightning-button-icon>
-                            </div>
-                            <div class="slds-page-header__control">
-                                <lightning-button-icon
-                                    icon-name="utility:table"
-                                    variant="border-filled"
-                                    alternative-text="Change view"
-                                    title="Change view">
-                                </lightning-button-icon>
-                            </div>
-                            <div class="slds-page-header__control">
-                                <lightning-button-icon
-                                    icon-name="utility:edit"
-                                    variant="border-filled"
-                                    alternative-text="Edit List"
-                                    title="Edit List">
-                                </lightning-button-icon>
-                            </div>
-                            <div class="slds-page-header__control">
-                                <lightning-button-icon
-                                    icon-name="utility:refresh"
-                                    variant="border-filled"
-                                    alternative-text="Refresh List"
-                                    title="Refresh List">
-                                </lightning-button-icon>
-                            </div>
-                            <div class="slds-page-header__control">
-                                <lightning-button-group>
+                            <template lwc:if={showListControls}>
+                                <div class="slds-page-header__control">
                                     <lightning-button-icon
-                                        icon-name="utility:chart"
+                                        icon-name="utility:settings"
                                         variant="border-filled"
-                                        alternative-text="Charts"
-                                        title="Charts">
+                                        alternative-text="List View Controls"
+                                        title="List View Controls">
                                     </lightning-button-icon>
+                                </div>
+                                <div class="slds-page-header__control">
                                     <lightning-button-icon
-                                        icon-name="utility:filterList"
+                                        icon-name="utility:table"
                                         variant="border-filled"
-                                        alternative-text="Filters"
-                                        title="Filters">
+                                        alternative-text="Change view"
+                                        title="Change view">
                                     </lightning-button-icon>
-                                </lightning-button-group>
-                            </div>
+                                </div>
+                                <div class="slds-page-header__control">
+                                    <lightning-button-icon
+                                        icon-name="utility:edit"
+                                        variant="border-filled"
+                                        alternative-text="Edit List"
+                                        title="Edit List">
+                                    </lightning-button-icon>
+                                </div>
+                                <div class="slds-page-header__control">
+                                    <lightning-button-icon
+                                        icon-name="utility:refresh"
+                                        variant="border-filled"
+                                        alternative-text="Refresh List"
+                                        title="Refresh List">
+                                    </lightning-button-icon>
+                                </div>
+                                <div class="slds-page-header__control">
+                                    <lightning-button-group>
+                                        <lightning-button-icon
+                                            icon-name="utility:chart"
+                                            variant="border-filled"
+                                            alternative-text="Charts"
+                                            title="Charts">
+                                        </lightning-button-icon>
+                                        <lightning-button-icon
+                                            icon-name="utility:filterList"
+                                            variant="border-filled"
+                                            alternative-text="Filters"
+                                            title="Filters">
+                                        </lightning-button-icon>
+                                    </lightning-button-group>
+                                </div>
+                            </template>
                         </template>
                         <template lwc:if={isRelatedList}>
                             <div class="slds-page-header__control">

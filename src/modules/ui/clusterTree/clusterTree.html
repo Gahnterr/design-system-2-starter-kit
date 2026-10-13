@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Clusters">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <lightning-input
+                type="search"
+                label="Search clusters"
+                variant="label-hidden"
+                placeholder="Search..."
+                onchange={handleSearch}>
+            </lightning-input>
+            <template lwc:if={hasItems}>
+                <lightning-tree
+                    class="slds-m-top_small"
+                    header="Select a cluster to map it"
+                    items={items}
+                    selected-item={selectedId}
+                    onselect={handleSelect}>
+                </lightning-tree>
+            </template>
+            <template lwc:else>
+                <p class="slds-m-top_small slds-text-color_weak">No matching clusters</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
