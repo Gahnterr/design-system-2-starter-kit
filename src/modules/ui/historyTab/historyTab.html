@@ -1,0 +1,56 @@
+<template>
+    <div>
+        <ui-page-header
+            variant="record-home"
+            icon-name="standard:account"
+            title="History"
+            show-subtitle>
+            <span slot="subtitle">
+                <span class="slds-show">
+                    {eventCountText}
+                    <span class="slds-m-horizontal_xx-small" aria-hidden="true">&bull;</span>
+                    <ui-relative-time prefix="Last updated" timestamp={lastUpdated}></ui-relative-time>
+                </span>
+                <span lwc:if={hasSkipped} class="slds-show c-skipped">
+                    <lightning-icon
+                        class="slds-m-right_xx-small"
+                        icon-name="utility:warning"
+                        variant="warning"
+                        size="xx-small"
+                        alternative-text="Warning">
+                    </lightning-icon>
+                    <span class="c-skipped__text slds-m-right_xx-small">{skippedText}</span>
+                    <lightning-button variant="base" label="View skipped records" onclick={handleViewSkipped}></lightning-button>
+                </span>
+            </span>
+            <lightning-button-icon
+                slot="actions"
+                icon-name="utility:refresh"
+                variant="border-filled"
+                alternative-text="Refresh history"
+                title="Refresh history"
+                onclick={refresh}>
+            </lightning-button-icon>
+        </ui-page-header>
+
+        <div class="c-layout">
+            <ui-history-filters
+                filters={filters}
+                source-options={sourceOptions}
+                cluster-options={clusterOptions}
+                onfilterchange={handleFilterChange}>
+            </ui-history-filters>
+            <div class="c-results">
+                <ui-history-table
+                    key-field="id"
+                    data={rows}
+                    columns={columns}
+                    hide-checkbox-column>
+                </ui-history-table>
+                <p lwc:if={hasNoRows} class="slds-p-around_medium slds-text-color_weak">
+                    No events match these filters.
+                </p>
+            </div>
+        </div>
+    </div>
+</template>

@@ -19,6 +19,7 @@ export default class PageHeader extends LightningElement {
     @api label = '';
     @api metaText = '';
     @api hideDetails = false;
+    @api showSubtitle = false;
 
     _variant = VARIANT_BASE;
     _fields = [];

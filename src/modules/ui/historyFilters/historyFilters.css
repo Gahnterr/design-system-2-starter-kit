@@ -1,0 +1,4 @@
+:host {
+    display: block;
+    background: var(--slds-g-color-surface-container-1, #ffffff);
+}

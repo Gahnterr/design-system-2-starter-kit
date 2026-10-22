@@ -1,0 +1,62 @@
+<template>
+    <div class="slds-grid slds-grid_vertical-align-end slds-gutters_small slds-m-bottom_small">
+        <div class="slds-col slds-size_1-of-3">
+            <lightning-combobox label="Shape" value="child" options={shapeOptions}></lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            <lightning-combobox label="Direction" value="both" options={directionOptions}></lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+            <lightning-badge label="Capacity: all" class="slds-m-right_small"></lightning-badge>
+            <lightning-button label="Remove mapping" variant="destructive-text"></lightning-button>
+        </div>
+    </div>
+
+    <div class="slds-box slds-m-bottom_small">
+        <p class="slds-text-title_caps slds-m-bottom_small">Child object</p>
+        <div class="slds-grid slds-gutters_small">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input label="Child object API name" value="Citizenship__c"></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input label="Child relationship name" value="Citizenships__r"></lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters_small">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox label="Lookup to root" placeholder="Select an Option" options={fieldOptions}></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox label="Match key (inbound)" placeholder="Select an Option" options={fieldOptions}></lightning-combobox>
+            </div>
+        </div>
+    </div>
+
+    <div class="slds-box">
+        <div class="slds-grid slds-gutters_small slds-text-title_caps slds-m-bottom_x-small">
+            <div class="slds-col slds-size_1-of-3">Verato attribute</div>
+            <div class="slds-col slds-size_1-of-3">Salesforce field</div>
+            <div class="slds-col slds-size_1-of-3">or static value</div>
+        </div>
+        <template for:each={rows} for:item="row">
+            <div key={row.key} class="slds-grid slds-gutters_small slds-grid_vertical-align-center slds-m-bottom_x-small">
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input label="Verato attribute" variant="label-hidden" value={row.label} read-only></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-combobox label="Salesforce field" variant="label-hidden" value="none" options={fieldOptions}></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-grid slds-grid_vertical-align-center">
+                    <lightning-input class="slds-col" label="Static value" variant="label-hidden"></lightning-input>
+                    <lightning-button-icon
+                        class="slds-m-left_x-small"
+                        icon-name="utility:delete"
+                        variant="border-filled"
+                        alternative-text="Remove attribute"
+                        title="Remove attribute">
+                    </lightning-button-icon>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

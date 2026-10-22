@@ -44,6 +44,9 @@
                         <template lwc:if={showBaseMeta}>
                             <p class="slds-page-header__name-meta">{metaText}</p>
                         </template>
+                        <template lwc:if={showSubtitle}>
+                            <p class="slds-page-header__name-meta"><slot name="subtitle"></slot></p>
+                        </template>
                     </div>
                 </div>
             </div>

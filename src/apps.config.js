@@ -25,7 +25,7 @@ export const apps = [
     icon: 'utility:home',
     pathPrefix: '/app',
     defaultPath: '/app',
-    pages: ['home', 'icons', 'contacts'],
+    pages: ['clusterMapping'],
   },
   {
     id: 'console',
@@ -34,7 +34,7 @@ export const apps = [
     icon: 'utility:layout',
     pathPrefix: '/console',
     defaultPath: '/console',
-    pages: ['home', 'icons', 'contacts'],
+    pages: ['clusterMapping'],
   },
   {
     id: 'builder',
@@ -87,6 +87,7 @@ export function stripAppPrefix(logicalPath, app) {
 export function withAppPrefix(logicalPath, app) {
   if (!app) return logicalPath;
   if (logicalPath === '/' || !logicalPath) return app.pathPrefix;
+  if (logicalPath.startsWith('/?')) return `${app.pathPrefix}${logicalPath.slice(1)}`;
   return `${app.pathPrefix}${logicalPath}`;
 }
 

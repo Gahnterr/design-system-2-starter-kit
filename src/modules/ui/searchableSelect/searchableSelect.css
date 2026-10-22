@@ -1,0 +1,19 @@
+.c-trigger {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    /* Leaves room for the clear button. */
+    padding-right: var(--slds-g-spacing-8, 2rem);
+}
+
+.c-clear {
+    position: absolute;
+    top: 50%;
+    right: var(--slds-g-spacing-2, 0.5rem);
+    transform: translateY(-50%);
+}
+
+.c-menu {
+    max-height: 18rem;
+    overflow-y: auto;
+}

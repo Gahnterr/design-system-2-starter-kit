@@ -1,0 +1,61 @@
+<template>
+    <div class="c-filters slds-p-around_medium">
+        <h2 class="slds-text-heading_medium slds-m-bottom_small">Filters</h2>
+
+        <lightning-input
+            lwc:ref="search"
+            type="search"
+            label="Search records, link IDs and clusters"
+            variant="label-hidden"
+            placeholder="Search..."
+            value={filters.search}
+            onchange={handleSearch}>
+        </lightning-input>
+
+        <lightning-combobox
+            class="slds-show slds-m-top_small"
+            label="Period"
+            options={periodOptions}
+            value={filters.period}
+            onchange={handlePeriod}>
+        </lightning-combobox>
+        <template lwc:if={isCustomPeriod}>
+            <lightning-input type="date" label="From" value={filters.startDate} data-field="startDate" onchange={handleDate}></lightning-input>
+            <lightning-input type="date" label="To" value={filters.endDate} data-field="endDate" onchange={handleDate}></lightning-input>
+        </template>
+
+        <lightning-checkbox-group
+            class="slds-show slds-m-top_small"
+            label="Status"
+            options={statusOptions}
+            value={filters.statuses}
+            onchange={handleStatuses}>
+        </lightning-checkbox-group>
+
+        <ui-searchable-select
+            class="slds-show slds-m-top_small"
+            label="Sources"
+            options={sourceOptions}
+            value={filters.source}
+            default-value={allValue}
+            onchange={handleSource}>
+        </ui-searchable-select>
+
+        <ui-searchable-select
+            class="slds-show slds-m-top_small"
+            label="Clusters Changed"
+            options={clusterOptions}
+            value={filters.cluster}
+            default-value={allValue}
+            onchange={handleCluster}>
+        </ui-searchable-select>
+
+        <lightning-button
+            lwc:if={isFiltered}
+            class="slds-show slds-m-top_medium"
+            label="Clear Filters"
+            variant="neutral"
+            onclick={handleClear}>
+        </lightning-button>
+    </div>
+</template>

@@ -15,30 +15,10 @@
 export const routes = [
   {
     path: '/',
-    component: 'page-home',
-    title: 'Home',
-    navPage: 'home',
-    navLabel: 'Home',
-  },
-  {
-    path: '/icons',
-    component: 'page-icon-test',
-    title: 'Icons',
-    navPage: 'icons',
-    navLabel: 'Icons',
-  },
-  {
-    path: '/contacts',
-    component: 'page-contacts',
-    title: 'Contacts',
-    navPage: 'contacts',
-    navLabel: 'Contacts',
-  },
-  {
-    path: '/contacts/:id',
-    component: 'page-contact-detail',
-    title: (params) => `Contact ${params.id}`,
-    navHighlight: 'contacts',
+    component: 'page-cluster-mapping',
+    title: 'Verato Cluster Mapping',
+    navPage: 'clusterMapping',
+    navLabel: 'Verato Cluster Mapping',
   },
   {
     path: '/',

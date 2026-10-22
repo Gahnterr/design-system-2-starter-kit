@@ -12,6 +12,14 @@ globalLink.rel = 'stylesheet';
 globalLink.href = globalCssUrl;
 document.head.appendChild(globalLink);
 
+// Mount only once the active SLDS stylesheet has loaded. Components that measure themselves on
+// first render (e.g. lightning-tab-bar deciding what overflows into "More") would otherwise
+// measure an unstyled layout.
+const link = activeSldsLink();
+if (link && !link.sheet) {
+    await new Promise((r) => { link.addEventListener('load', r, { once: true }); });
+}
+
 // Create and mount the app component
 try {
     const app = createElement('shell-app', {
@@ -22,11 +30,6 @@ try {
     console.error('[LWC bootstrap] Failed to mount app:', err);
 }
 
-// Reveal the app once the active SLDS stylesheet has loaded.
-const link = activeSldsLink();
-if (link && !link.sheet) {
-    await new Promise((r) => { link.addEventListener('load', r, { once: true }); });
-}
 document.getElementById('app')?.classList.add('is-ready');
 
 // Preload icon template modules so they're likely ready when the first icons render.

@@ -1,0 +1,39 @@
+<template>
+    <div>
+        <ui-page-header
+            variant="record-home"
+            icon-name="standard:account"
+            title="Verato Cluster Mapping"
+            show-subtitle>
+            <span slot="subtitle">
+                <span class="slds-m-right_xx-small">Configure the demographic data to be mapped and sent between Salesforce and Verato Cloud MDM.</span>
+                <lightning-formatted-url value={learnMoreUrl} label="Learn more." target="_blank"></lightning-formatted-url>
+            </span>
+            <div slot="actions" class="slds-grid slds-grid_vertical slds-grid_vertical-align-end">
+                <lightning-button-icon
+                    icon-name="utility:refresh"
+                    variant="border-filled"
+                    alternative-text="Refresh all data"
+                    title="Refresh all data"
+                    onclick={refresh}>
+                </lightning-button-icon>
+                <ui-relative-time
+                    class="slds-text-body_small slds-text-color_weak slds-m-top_x-small"
+                    prefix="Last refreshed"
+                    icon-name="utility:refresh"
+                    timestamp={lastRefreshed}>
+                </ui-relative-time>
+            </div>
+        </ui-page-header>
+
+        <div class="c-layout">
+            <ui-cluster-tree
+                domains={domains}
+                clusters={clusters}
+                selected-id={selectedId}
+                onclusterselect={handleClusterSelect}>
+            </ui-cluster-tree>
+            <ui-cluster-mapping-card cluster={selectedCluster} attributes={selectedAttributes}></ui-cluster-mapping-card>
+        </div>
+    </div>
+</template>
