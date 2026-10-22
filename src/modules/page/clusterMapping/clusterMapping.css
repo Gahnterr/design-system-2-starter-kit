@@ -1,4 +1,4 @@
-/* A custom element is inline by default; the tab bar needs the page's full width to lay out its tabs. */
+/* A custom element is inline by default; the page content needs the full width. */
 :host {
     display: block;
 }

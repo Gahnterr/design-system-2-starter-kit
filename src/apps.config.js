@@ -25,7 +25,7 @@ export const apps = [
     icon: 'utility:home',
     pathPrefix: '/app',
     defaultPath: '/app',
-    pages: ['clusterMapping'],
+    pages: ['clusterMapping', 'history'],
   },
   {
     id: 'console',
@@ -34,7 +34,7 @@ export const apps = [
     icon: 'utility:layout',
     pathPrefix: '/console',
     defaultPath: '/console',
-    pages: ['clusterMapping'],
+    pages: ['clusterMapping', 'history'],
   },
   {
     id: 'builder',

@@ -18,7 +18,14 @@ export const routes = [
     component: 'page-cluster-mapping',
     title: 'Verato Cluster Mapping',
     navPage: 'clusterMapping',
-    navLabel: 'Verato Cluster Mapping',
+    navLabel: 'Cluster Mapping',
+  },
+  {
+    path: '/history',
+    component: 'page-history',
+    title: 'History',
+    navPage: 'history',
+    navLabel: 'History',
   },
   {
     path: '/',

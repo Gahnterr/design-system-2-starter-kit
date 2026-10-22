@@ -10,12 +10,14 @@ import {
 } from '../../../apps.config';
 import { toggleSLDS, activeSLDSVersion, STORAGE_KEY_SLDS_VERSION } from '../../../build/slds-loader';
 import ClusterMapping from 'page/clusterMapping';
+import History from 'page/history';
 import Builder from 'page/builder';
 import NotFound from 'page/notFound';
 
 /** Option A: explicit registration – add one import + one entry here when adding a route */
 const ROUTE_COMPONENTS = {
     'page-cluster-mapping': ClusterMapping,
+    'page-history': History,
     'page-builder': Builder,
 };
 
